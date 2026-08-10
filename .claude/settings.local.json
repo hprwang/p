@@ -1,0 +1,12 @@
+{
+  "enabledMcpjsonServers": [
+    "context7",
+    "executeautomation-playwright-server",
+    "memory"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest *)"
+    ]
+  }
+}
