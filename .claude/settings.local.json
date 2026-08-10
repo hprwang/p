@@ -1,12 +1,17 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest *)",
+      "Bash(npm install *)",
+      "Bash(export ECC_GATEGUARD=off)",
+      "Bash(set ECC_GATEGUARD=off *)",
+      "Bash(npm run *)",
+      "Bash(npm ls *)"
+    ]
+  },
   "enabledMcpjsonServers": [
     "context7",
     "executeautomation-playwright-server",
     "memory"
-  ],
-  "permissions": {
-    "allow": [
-      "Bash(npx create-next-app@latest *)"
-    ]
-  }
+  ]
 }

@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# InternTrack - Internship Application Tracker
+
+A modern web application for students to track their internship applications, manage deadlines, and visualize their progress.
+
+## Features
+
+- 🎯 **Centralized Tracking** - Keep all your internship applications in one place
+- ⏰ **Deadline Reminders** - Never miss an application deadline
+- 📊 **Progress Analytics** - Visualize your application journey with charts
+- ✅ **Document Checklist** - Track which documents are ready for each application
+- 🔐 **Secure Authentication** - Email/password and Google OAuth support
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS
+- **Database & Auth**: Supabase
+- **Charts**: Recharts
+- **Icons**: Lucide React
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ and npm
+- A Supabase account (free tier works)
+
+### Setup
+
+1. **Clone and install dependencies**
+
+```bash
+npm install
+```
+
+2. **Set up Supabase**
+
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Go to Project Settings → API to get your credentials
+   - Copy `.env.example` to `.env.local` and add your Supabase credentials:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local`:
+
+```
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+```
+
+3. **Run the database schema**
+
+   - Open your Supabase project's SQL Editor
+   - Copy the contents of `supabase/schema.sql`
+   - Run the SQL to create tables, policies, and triggers
+
+4. **(Optional) Enable Google OAuth**
+
+   - Follow [Supabase's Google OAuth guide](https://supabase.com/docs/guides/auth/social-login/auth-google)
+   - Add your Google Client ID to `.env.local`:
+
+```
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id_here
+```
+
+5. **Start the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/
+│   ├── (marketing)/       # Public pages (home, about)
+│   │   ├── page.tsx       # Landing page
+│   │   └── layout.tsx     # Marketing layout
+│   ├── auth/              # Authentication pages
+│   │   ├── signin/
+│   │   ├── signup/
+│   │   └── callback/
+│   └── dashboard/         # Protected dashboard
+├── components/
+│   ├── layout/            # Header, Footer
+│   └── dashboard/         # Dashboard components
+├── lib/
+│   ├── supabase/          # Supabase clients
+│   ├── types.ts           # TypeScript types
+│   └── constants.ts       # Shared constants
+└── middleware.ts          # Auth middleware
 
-## Learn More
+supabase/
+└── schema.sql             # Database schema
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Database Schema
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **users** - User profiles (name, email, program)
+- **applications** - Internship applications (company, role, status, deadlines)
+- **tasks** - Document checklist per application (resume, cover letter, transcript)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Application Status Flow
 
-## Deploy on Vercel
+`Wishlist → Applied → Interview → Offer / Rejected`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy to Vercel:
+
+```bash
+npm run build
+vercel deploy
+```
+
+Make sure to set your environment variables in the Vercel dashboard.
