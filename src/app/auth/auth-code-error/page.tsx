@@ -18,7 +18,7 @@ export default function AuthCodeErrorPage() {
         <div className="mt-8 flex flex-col gap-3">
           <Link
             href="/auth/signin"
-            className="w-full rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-500 transition-colors"
+            className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-primary-hover transition-colors"
           >
             Back to sign in
           </Link>

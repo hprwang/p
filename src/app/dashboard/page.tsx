@@ -108,7 +108,7 @@ export default function DashboardPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Applications</h1>
-        <button onClick={handleAdd} className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-500">
+        <button onClick={handleAdd} className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-primary-hover">
           <Plus className="h-4 w-4" /> Add Application
         </button>
       </div>
@@ -140,7 +140,7 @@ export default function DashboardPage() {
                   <td className="px-6 py-4">
                     <div className="font-medium text-gray-900">{app.company}</div>
                     {app.posting_link && isSafeExternalUrl(app.posting_link) && (
-                      <a href={app.posting_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:text-blue-500 inline-flex items-center gap-1">
+                      <a href={app.posting_link} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:text-primary-hover inline-flex items-center gap-1">
                         <ExternalLink className="h-3 w-3" /> Posting
                       </a>
                     )}
@@ -161,7 +161,7 @@ export default function DashboardPage() {
                     <button
                       onClick={() => handleEdit(app)}
                       aria-label={`Edit ${app.company}`}
-                      className="text-gray-400 hover:text-blue-600 p-1"
+                      className="text-gray-400 hover:text-primary p-1"
                     >
                       <Edit className="h-4 w-4" />
                     </button>

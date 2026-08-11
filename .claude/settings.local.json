@@ -8,7 +8,9 @@
       "Bash(npm run *)",
       "Bash(npm ls *)",
       "Bash(npx @next/codemod@canary middleware-to-proxy .)",
-      "Bash(npx @next/codemod@canary middleware-to-proxy . --force)"
+      "Bash(npx @next/codemod@canary middleware-to-proxy . --force)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'style: refresh UI with cohesive indigo brand design system *)"
     ]
   },
   "enabledMcpjsonServers": [

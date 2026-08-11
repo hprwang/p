@@ -11,7 +11,7 @@ interface Stats {
 export default function DashboardStats({ stats }: { stats: Stats }) {
   const items = [
     { label: 'Total', value: stats.total, color: 'text-gray-900' },
-    { label: 'Applied', value: stats.applied, color: 'text-blue-600' },
+    { label: 'Applied', value: stats.applied, color: 'text-primary' },
     { label: 'Interview', value: stats.interview, color: 'text-purple-600' },
     { label: 'Offer', value: stats.offer, color: 'text-green-600' },
     { label: 'Rejected', value: stats.rejected, color: 'text-red-600' },

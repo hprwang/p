@@ -15,8 +15,8 @@ export default function AboutPage() {
           <div className="space-y-12">
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                  <CheckCircle className="h-6 w-6 text-blue-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft">
+                  <CheckCircle className="h-6 w-6 text-primary" />
                 </div>
               </div>
               <div>
@@ -29,8 +29,8 @@ export default function AboutPage() {
 
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-100">
-                  <Clock className="h-6 w-6 text-purple-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft">
+                  <Clock className="h-6 w-6 text-primary" />
                 </div>
               </div>
               <div>
@@ -43,8 +43,8 @@ export default function AboutPage() {
 
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100">
-                  <TrendingUp className="h-6 w-6 text-green-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft">
+                  <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
               </div>
               <div>
@@ -57,8 +57,8 @@ export default function AboutPage() {
 
             <div className="flex gap-4">
               <div className="flex-shrink-0">
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-100">
-                  <Users className="h-6 w-6 text-yellow-600" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft">
+                  <Users className="h-6 w-6 text-primary" />
                 </div>
               </div>
               <div>
@@ -70,14 +70,14 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="mt-16 bg-blue-50 rounded-xl p-8 text-center border border-blue-100">
+          <div className="mt-16 bg-primary-soft rounded-xl p-8 text-center border border-primary/20">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to get started?</h2>
             <p className="text-gray-600 mb-6">
               Join thousands of students using InternTrack to land their dream internships.
             </p>
             <a
               href="/auth/signup"
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white hover:bg-blue-500"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-hover hover:shadow-lg transition-all"
             >
               Create your free account
             </a>

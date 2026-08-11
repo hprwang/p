@@ -9,14 +9,19 @@ import { parseLocalDate } from '@/lib/date'
 
 export default function AnalyticsPage() {
   const [applications, setApplications] = useState<Application[]>([])
+  const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
   useEffect(() => {
     const load = async () => {
       const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
+      if (!user) {
+        setLoading(false)
+        return
+      }
       const { data } = await supabase.from('applications').select('*')
       if (data) setApplications(data)
+      setLoading(false)
     }
     load()
   }, [])
@@ -48,7 +53,9 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <h2 className="text-lg font-semibold mb-4">Applications by Status</h2>
-          {statusData.length > 0 ? (
+          {loading ? (
+            <p className="text-gray-500 text-center py-12">Loading…</p>
+          ) : statusData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={statusData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value" label={({ name, value }) => `${name}: ${value}`}>
@@ -64,14 +71,16 @@ export default function AnalyticsPage() {
 
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <h2 className="text-lg font-semibold mb-4">Applications Over Time</h2>
-          {monthlyData.length > 0 ? (
+          {loading ? (
+            <p className="text-gray-500 text-center py-12">Loading…</p>
+          ) : monthlyData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={monthlyData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="count" fill="#3b82f6" />
+                <Bar dataKey="count" fill="#4f46e5" />
               </BarChart>
             </ResponsiveContainer>
           ) : (

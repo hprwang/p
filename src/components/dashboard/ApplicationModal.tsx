@@ -69,17 +69,17 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
-              <input required type="text" value={form.company} onChange={e => setForm({...form, company: e.target.value})} className="w-full px-3 py-2 border rounded-lg" placeholder="Google" />
+              <input required type="text" value={form.company} onChange={e => setForm({...form, company: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Google" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-              <input required type="text" value={form.role} onChange={e => setForm({...form, role: e.target.value})} className="w-full px-3 py-2 border rounded-lg" placeholder="SWE Intern" />
+              <input required type="text" value={form.role} onChange={e => setForm({...form, role: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="SWE Intern" />
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
-            <select value={form.status} onChange={e => setForm({...form, status: e.target.value as ApplicationStatus})} className="w-full px-3 py-2 border rounded-lg">
+            <select value={form.status} onChange={e => setForm({...form, status: e.target.value as ApplicationStatus})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
               {(Object.keys(STATUS_LABELS) as ApplicationStatus[]).map(status => (
                 <option key={status} value={status}>{STATUS_LABELS[status]}</option>
               ))}
@@ -88,23 +88,23 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Posting Link</label>
-            <input type="url" value={form.posting_link} onChange={e => setForm({...form, posting_link: e.target.value})} className="w-full px-3 py-2 border rounded-lg" placeholder="https://..." />
+            <input type="url" value={form.posting_link} onChange={e => setForm({...form, posting_link: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" placeholder="https://..." />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Applied Date</label>
-              <input type="date" value={form.applied_date} onChange={e => setForm({...form, applied_date: e.target.value})} className="w-full px-3 py-2 border rounded-lg" />
+              <input type="date" value={form.applied_date} onChange={e => setForm({...form, applied_date: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Deadline</label>
-              <input type="date" value={form.deadline} onChange={e => setForm({...form, deadline: e.target.value})} className="w-full px-3 py-2 border rounded-lg" />
+              <input type="date" value={form.deadline} onChange={e => setForm({...form, deadline: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
-            <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} className="w-full px-3 py-2 border rounded-lg" rows={3} placeholder="Contacts, follow-up, etc." />
+            <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" rows={3} placeholder="Contacts, follow-up, etc." />
           </div>
 
           {submitError && (
@@ -115,7 +115,7 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
 
           <div className="flex gap-3 pt-4">
             <button type="button" onClick={onClose} className="flex-1 px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Cancel</button>
-            <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500">{app ? 'Save' : 'Add'}</button>
+            <button type="submit" className="flex-1 px-4 py-2 bg-primary text-white rounded-lg shadow-md hover:bg-primary-hover">{app ? 'Save' : 'Add'}</button>
           </div>
         </form>
       </div>

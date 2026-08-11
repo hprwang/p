@@ -24,15 +24,15 @@ export default function DashboardNav() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/dashboard" className="flex items-center gap-2">
-              <Rocket className="h-8 w-8 text-blue-600" />
+              <Rocket className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold text-gray-900">InternTrack</span>
             </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-6">
-            <Link href="/dashboard" className="text-sm font-medium text-gray-700 hover:text-blue-600">Applications</Link>
-            <Link href="/dashboard/analytics" className="text-sm font-medium text-gray-700 hover:text-blue-600">Analytics</Link>
-            <Link href="/dashboard/deadlines" className="text-sm font-medium text-gray-700 hover:text-blue-600">Deadlines</Link>
+            <Link href="/dashboard" className="text-sm font-medium text-gray-700 hover:text-primary">Applications</Link>
+            <Link href="/dashboard/analytics" className="text-sm font-medium text-gray-700 hover:text-primary">Analytics</Link>
+            <Link href="/dashboard/deadlines" className="text-sm font-medium text-gray-700 hover:text-primary">Deadlines</Link>
           </div>
 
           <div className="flex items-center gap-4">
@@ -48,8 +48,8 @@ export default function DashboardNav() {
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="flex items-center gap-2 p-1 rounded-full hover:bg-gray-100"
               >
-                <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                  <User className="h-4 w-4 text-blue-600" />
+                <div className="h-8 w-8 rounded-full bg-primary-soft flex items-center justify-center">
+                  <User className="h-4 w-4 text-primary" />
                 </div>
               </button>
               {userMenuOpen && (

@@ -67,7 +67,13 @@ export default function HomePage() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white py-20 sm:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Decorative brand glow */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 left-1/2 h-96 w-[640px] -translate-x-1/2 rounded-full bg-linear-to-br from-primary/15 via-primary-soft/60 to-transparent blur-3xl" />
+          <div className="absolute top-24 -left-24 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl" />
+          <div className="absolute top-40 -right-24 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl" />
+        </div>
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Track every internship application in one place
@@ -79,7 +85,7 @@ export default function HomePage() {
             <div className="mt-10 flex items-center justify-center gap-4">
               <Link
                 href="/auth/signup"
-                className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-hover hover:shadow-lg transition-all"
               >
                 Start tracking for free
                 <ArrowRight className="h-4 w-4" />
@@ -105,18 +111,22 @@ export default function HomePage() {
               </div>
 
               {/* Summary Stats */}
-              <div className="grid grid-cols-4 gap-4 border-b border-gray-200 p-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 border-b border-gray-200 p-6">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900">{sampleApplications.length}</div>
                   <div className="text-sm text-gray-600">Total</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">{statusCounts.Applied}</div>
+                  <div className="text-2xl font-bold text-primary">{statusCounts.Applied}</div>
                   <div className="text-sm text-gray-600">Applied</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-purple-600">{statusCounts.Interview}</div>
                   <div className="text-sm text-gray-600">Interview</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600">{statusCounts.Offer}</div>
+                  <div className="text-sm text-gray-600">Offer</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-red-600">{statusCounts.Rejected}</div>
@@ -175,10 +185,10 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature, i) => (
-                <div key={i} className="flex gap-4 p-6 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all">
+                <div key={i} className="flex gap-4 p-6 rounded-xl border border-gray-200 hover:border-primary/40 hover:shadow-md hover:bg-primary-soft/30 transition-all">
                   <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
-                      <feature.icon className="h-6 w-6 text-blue-600" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft">
+                      <feature.icon className="h-6 w-6 text-primary" />
                     </div>
                   </div>
                   <div>
@@ -212,7 +222,7 @@ export default function HomePage() {
                   <div className="mt-6 pt-6 border-t border-gray-100">
                     <div className="font-semibold text-gray-900">{testimonial.author}</div>
                     <div className="text-sm text-gray-600">{testimonial.program}</div>
-                    <div className="text-sm text-blue-600 font-medium mt-1">{testimonial.year}</div>
+                    <div className="text-sm text-primary font-medium mt-1">{testimonial.year}</div>
                   </div>
                 </div>
               ))}
@@ -222,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-linear-to-b from-white to-primary-soft/40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">
@@ -234,7 +244,7 @@ export default function HomePage() {
             <div className="mt-10">
               <Link
                 href="/auth/signup"
-                className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-blue-500 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-white shadow-md hover:bg-primary-hover hover:shadow-lg transition-all"
               >
                 Get started free
                 <ArrowRight className="h-5 w-5" />

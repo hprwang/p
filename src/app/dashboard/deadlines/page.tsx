@@ -8,18 +8,23 @@ import { formatDate, daysUntil } from '@/lib/date'
 
 export default function DeadlinesPage() {
   const [applications, setApplications] = useState<Application[]>([])
+  const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
   useEffect(() => {
     const load = async () => {
       const { data: { user } } = await supabase.auth.getUser()
-      if (!user) return
+      if (!user) {
+        setLoading(false)
+        return
+      }
       const { data } = await supabase
         .from('applications')
         .select('*')
         .not('deadline', 'is', null)
         .order('deadline', { ascending: true })
       if (data) setApplications(data)
+      setLoading(false)
     }
     load()
   }, [])
@@ -33,7 +38,12 @@ export default function DeadlinesPage() {
       <h1 className="text-2xl font-bold text-gray-900">Upcoming Deadlines</h1>
 
       <div className="space-y-4">
-        {upcoming.length === 0 ? (
+        {loading ? (
+          <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
+            <Calendar className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+            <p>Loading deadlines…</p>
+          </div>
+        ) : upcoming.length === 0 ? (
           <div className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
             <Calendar className="h-12 w-12 mx-auto mb-4 text-gray-300" />
             <p>No upcoming deadlines</p>
@@ -46,7 +56,7 @@ export default function DeadlinesPage() {
               <div
                 key={app.id}
                 className={`bg-white rounded-lg border p-4 ${
-                  urgent ? 'border-red-300 bg-red-50' : 'border-gray-200'
+                  urgent ? 'border-l-4 border-l-red-400 border-gray-200' : 'border-gray-200'
                 }`}
               >
                 <div className="flex items-center justify-between">
