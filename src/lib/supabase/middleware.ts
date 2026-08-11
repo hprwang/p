@@ -29,8 +29,28 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  // Refresh session if expired - required for Server Components
-  await supabase.auth.getUser()
+  // Refresh session if expired — required for Server Components. Do NOT run
+  // code between createServerClient and getUser(), so cookies are refreshed
+  // for every subsequent request.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  const url = request.nextUrl.clone()
+  const { pathname } = url
+
+  // Protect the dashboard: unauthenticated users are sent to sign in.
+  if (!user && pathname.startsWith('/dashboard')) {
+    url.pathname = '/auth/signin'
+    return NextResponse.redirect(url)
+  }
+
+  // Already signed in? Send them to the dashboard instead of the auth pages.
+  // /auth/callback is deliberately excluded — it completes the OAuth flow.
+  if (user && (pathname === '/auth/signin' || pathname === '/auth/signup')) {
+    url.pathname = '/dashboard'
+    return NextResponse.redirect(url)
+  }
 
   return supabaseResponse
 }

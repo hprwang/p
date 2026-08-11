@@ -5,8 +5,19 @@ import { createClient } from '@/lib/supabase/client'
 import { Plus, Edit, Trash2, ExternalLink } from 'lucide-react'
 import type { Application } from '@/lib/types'
 import { STATUS_LABELS, STATUS_COLORS } from '@/lib/constants'
+import { formatDate } from '@/lib/date'
 import DashboardStats from '@/components/dashboard/DashboardStats'
 import ApplicationModal from '@/components/dashboard/ApplicationModal'
+
+/** Only allow real web links to open from a posting, never `javascript:` etc. */
+const isSafeExternalUrl = (value: string): boolean => {
+  try {
+    const url = new URL(value)
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
 
 export default function DashboardPage() {
   const [applications, setApplications] = useState<Application[]>([])
@@ -21,7 +32,10 @@ export default function DashboardPage() {
 
   const loadApplications = async () => {
     const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return
+    if (!user) {
+      setLoading(false)
+      return
+    }
 
     const { data } = await supabase
       .from('applications')
@@ -33,7 +47,11 @@ export default function DashboardPage() {
 
   const handleDelete = async (id: string) => {
     if (!confirm('Delete this application?')) return
-    await supabase.from('applications').delete().eq('id', id)
+    const { error } = await supabase.from('applications').delete().eq('id', id)
+    if (error) {
+      console.error('Failed to delete application:', error.message)
+      return
+    }
     setApplications(applications.filter(a => a.id !== id))
   }
 
@@ -52,27 +70,30 @@ export default function DashboardPage() {
     setEditingApp(null)
   }
 
-  const handleSave = async (app: Partial<Application>) => {
+  const handleSave = async (app: Partial<Application>): Promise<{ ok: boolean; error?: string }> => {
     const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return
+    if (!user) return { ok: false, error: 'You are not signed in.' }
 
     if (editingApp) {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('applications')
         .update(app)
         .eq('id', editingApp.id)
         .select()
         .single()
+      if (error) return { ok: false, error: error.message }
       if (data) setApplications(applications.map(a => a.id === data.id ? data : a))
     } else {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('applications')
         .insert({ ...app, user_id: user.id })
         .select()
         .single()
+      if (error) return { ok: false, error: error.message }
       if (data) setApplications([data, ...applications])
     }
     handleModalClose()
+    return { ok: true }
   }
 
   const stats = {
@@ -118,7 +139,7 @@ export default function DashboardPage() {
                 <tr key={app.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4">
                     <div className="font-medium text-gray-900">{app.company}</div>
-                    {app.posting_link && (
+                    {app.posting_link && isSafeExternalUrl(app.posting_link) && (
                       <a href={app.posting_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:text-blue-500 inline-flex items-center gap-1">
                         <ExternalLink className="h-3 w-3" /> Posting
                       </a>
@@ -131,16 +152,24 @@ export default function DashboardPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-gray-600">
-                    {app.applied_date ? new Date(app.applied_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
+                    {formatDate(app.applied_date) || '-'}
                   </td>
                   <td className="px-6 py-4 text-gray-600">
-                    {app.deadline ? new Date(app.deadline).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '-'}
+                    {formatDate(app.deadline) || '-'}
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button onClick={() => handleEdit(app)} className="text-gray-400 hover:text-blue-600 p-1">
+                    <button
+                      onClick={() => handleEdit(app)}
+                      aria-label={`Edit ${app.company}`}
+                      className="text-gray-400 hover:text-blue-600 p-1"
+                    >
                       <Edit className="h-4 w-4" />
                     </button>
-                    <button onClick={() => handleDelete(app.id)} className="text-gray-400 hover:text-red-600 p-1 ml-2">
+                    <button
+                      onClick={() => handleDelete(app.id)}
+                      aria-label={`Delete ${app.company}`}
+                      className="text-gray-400 hover:text-red-600 p-1 ml-2"
+                    >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </td>

@@ -34,7 +34,7 @@ export default function SignUpPage() {
 
     const supabase = createClient()
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -51,18 +51,30 @@ export default function SignUpPage() {
       return
     }
 
-    setError('Please check your email to confirm your account.')
+    // Email confirmation may be disabled in some projects — if a session is
+    // returned immediately, skip the confirmation prompt and go to the dashboard.
+    if (data.session) {
+      router.push('/dashboard')
+      router.refresh()
+    } else {
+      setError('Please check your email to confirm your account.')
+    }
     setLoading(false)
   }
 
   const handleGoogleSignIn = async () => {
-    const supabase = createClient()
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    })
+    try {
+      const supabase = createClient()
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      })
+      if (error) setError(error.message)
+    } catch {
+      setError('Unable to start Google sign-in. Please try again.')
+    }
   }
 
   return (

@@ -8,7 +8,7 @@ import { STATUS_LABELS, DOCUMENT_TASKS } from '@/lib/constants'
 interface Props {
   app: Application | null
   onClose: () => void
-  onSave: (app: Partial<Application>) => void
+  onSave: (app: Partial<Application>) => Promise<{ ok: boolean; error?: string }>
 }
 
 interface FormState {
@@ -26,6 +26,7 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
     company: '', role: '', status: 'wishlist',
     posting_link: '', applied_date: '', deadline: '', notes: ''
   })
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   useEffect(() => {
     if (app) {
@@ -37,9 +38,11 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
     }
   }, [app])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    onSave({
+    setSubmitError(null)
+
+    const result = await onSave({
       company: form.company,
       role: form.role,
       status: form.status,
@@ -48,6 +51,11 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
       deadline: form.deadline || null,
       notes: form.notes || null,
     })
+
+    // The parent only closes the modal on success, so a failure keeps this open.
+    if (!result.ok) {
+      setSubmitError(result.error ?? 'Something went wrong. Please try again.')
+    }
   }
 
   return (
@@ -98,6 +106,12 @@ export default function ApplicationModal({ app, onClose, onSave }: Props) {
             <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
             <textarea value={form.notes} onChange={e => setForm({...form, notes: e.target.value})} className="w-full px-3 py-2 border rounded-lg" rows={3} placeholder="Contacts, follow-up, etc." />
           </div>
+
+          {submitError && (
+            <div className="p-3 rounded-md bg-red-50 border border-red-200">
+              <p className="text-sm text-red-600">{submitError}</p>
+            </div>
+          )}
 
           <div className="flex gap-3 pt-4">
             <button type="button" onClick={onClose} className="flex-1 px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50">Cancel</button>

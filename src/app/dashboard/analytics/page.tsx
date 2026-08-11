@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import type { Application, ApplicationStatus } from '@/lib/types'
 import { STATUS_LABELS, STATUS_COLORS } from '@/lib/constants'
+import { parseLocalDate } from '@/lib/date'
 
 export default function AnalyticsPage() {
   const [applications, setApplications] = useState<Application[]>([])
@@ -29,7 +30,7 @@ export default function AnalyticsPage() {
   const monthlyData = Object.entries(
     applications.reduce((acc, app) => {
       const month = app.applied_date
-        ? new Date(app.applied_date).toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+        ? parseLocalDate(app.applied_date)?.toLocaleDateString('en-US', { month: 'short', year: '2-digit' }) ?? 'Unknown'
         : 'Unknown'
       acc[month] = (acc[month] || 0) + 1
       return acc

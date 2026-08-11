@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, Clock, TrendingUp, Users } from 'lucide-react'
+import { STATUS_LABELS, STATUS_COLORS } from '@/lib/constants'
+import { formatDate } from '@/lib/date'
 
 // Sample applications for the live preview widget
 const sampleApplications = [
@@ -8,22 +10,6 @@ const sampleApplications = [
   { company: 'Stripe', role: 'Data Science Intern', appliedDate: '2024-01-08', status: 'offer' as const },
   { company: 'Airbnb', role: 'Frontend Engineering Intern', appliedDate: '2024-01-05', status: 'rejected' as const },
 ]
-
-const statusColors = {
-  wishlist: 'bg-gray-100 text-gray-700',
-  applied: 'bg-blue-100 text-blue-700',
-  interview: 'bg-purple-100 text-purple-700',
-  offer: 'bg-green-100 text-green-700',
-  rejected: 'bg-red-100 text-red-700',
-}
-
-const statusLabels = {
-  wishlist: 'Wishlist',
-  applied: 'Applied',
-  interview: 'Interview',
-  offer: 'Offer',
-  rejected: 'Rejected',
-}
 
 const features = [
   {
@@ -157,11 +143,11 @@ export default function HomePage() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-600">{app.role}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-600">
-                          {new Date(app.appliedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                          {formatDate(app.appliedDate, { month: 'short', day: 'numeric' })}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusColors[app.status]}`}>
-                            {statusLabels[app.status]}
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_COLORS[app.status].chip}`}>
+                            {STATUS_LABELS[app.status]}
                           </span>
                         </td>
                       </tr>

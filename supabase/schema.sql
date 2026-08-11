@@ -51,6 +51,21 @@ create index applications_deadline_idx on public.applications(deadline)
   where deadline is not null;
 create index tasks_application_id_idx on public.tasks(application_id);
 
+-- Keep updated_at in sync whenever an application row changes.
+create or replace function public.handle_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+create trigger set_applications_updated_at
+  before update on public.applications
+  for each row execute procedure public.handle_updated_at();
+
 -- ============================================================
 -- Row Level Security
 -- ============================================================

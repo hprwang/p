@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { Calendar, AlertTriangle } from 'lucide-react'
 import type { Application } from '@/lib/types'
+import { formatDate, daysUntil } from '@/lib/date'
 
 export default function DeadlinesPage() {
   const [applications, setApplications] = useState<Application[]>([])
@@ -23,19 +24,9 @@ export default function DeadlinesPage() {
     load()
   }, [])
 
-  const upcoming = applications.filter(a => a.deadline && new Date(a.deadline) >= new Date())
-  const past = applications.filter(a => a.deadline && new Date(a.deadline) < new Date())
-
-  const formatDate = (date: string) =>
-    new Date(date).toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    })
-
-  const daysUntil = (date: string) =>
-    Math.ceil((new Date(date).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+  // Split by calendar day so "today" counts as upcoming until the day ends.
+  const upcoming = applications.filter(a => a.deadline && daysUntil(a.deadline) >= 0)
+  const past = applications.filter(a => a.deadline && daysUntil(a.deadline) < 0)
 
   return (
     <div className="space-y-6">
@@ -49,7 +40,7 @@ export default function DeadlinesPage() {
           </div>
         ) : (
           upcoming.map(app => {
-            const days = daysUntil(app.deadline!)
+            const days = daysUntil(app.deadline)
             const urgent = days <= 7
             return (
               <div
@@ -66,7 +57,7 @@ export default function DeadlinesPage() {
                   <div className="text-right">
                     <div className="flex items-center gap-2 text-gray-600">
                       <Calendar className="h-4 w-4" />
-                      <span className="text-sm">{formatDate(app.deadline!)}</span>
+                      <span className="text-sm">{formatDate(app.deadline)}</span>
                     </div>
                     <p
                       className={`text-sm font-medium mt-1 ${
@@ -100,7 +91,7 @@ export default function DeadlinesPage() {
                   </div>
                   <div className="flex items-center gap-2 text-gray-500 text-sm">
                     <AlertTriangle className="h-4 w-4" />
-                    <span>{formatDate(app.deadline!)}</span>
+                    <span>{formatDate(app.deadline)}</span>
                   </div>
                 </div>
               </div>
