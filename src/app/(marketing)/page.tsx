@@ -66,19 +66,19 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white py-20 sm:py-32">
+      <section className="relative overflow-hidden bg-white py-20 sm:py-32 dark:bg-slate-950">
         {/* Decorative brand glow */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-32 left-1/2 h-96 w-[640px] -translate-x-1/2 rounded-full bg-linear-to-br from-primary/15 via-primary-soft/60 to-transparent blur-3xl" />
-          <div className="absolute top-24 -left-24 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl" />
-          <div className="absolute top-40 -right-24 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl" />
+          <div className="absolute -top-32 left-1/2 h-96 w-[640px] -translate-x-1/2 rounded-full bg-linear-to-br from-primary/15 via-primary-soft/60 to-transparent blur-3xl dark:from-indigo-500/25 dark:via-indigo-950/50 dark:to-transparent" />
+          <div className="absolute top-24 -left-24 h-72 w-72 rounded-full bg-violet-500/10 blur-3xl dark:bg-violet-500/15" />
+          <div className="absolute top-40 -right-24 h-72 w-72 rounded-full bg-sky-500/10 blur-3xl dark:bg-sky-500/15" />
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl dark:text-slate-100">
               Track every internship application in one place
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-slate-300">
               Stay organized, never miss a deadline, and land your dream internship.
               Track applications, manage documents, and visualize your progress.
             </p>
@@ -92,7 +92,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold text-gray-700 ring-1 ring-gray-300 hover:bg-gray-50 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-base font-semibold text-gray-700 ring-1 ring-gray-300 hover:bg-gray-50 transition-colors dark:text-slate-200 dark:ring-slate-700 dark:hover:bg-slate-800"
               >
                 How it works
               </Link>
@@ -102,57 +102,57 @@ export default function HomePage() {
       </section>
 
       {/* Live Preview Widget */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gray-50 py-16 dark:bg-slate-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-5xl">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-              <div className="border-b border-gray-200 bg-gray-50 px-6 py-4">
-                <h2 className="text-lg font-semibold text-gray-900">Your Applications</h2>
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden dark:bg-slate-800 dark:border-slate-700">
+              <div className="border-b border-gray-200 bg-gray-50 px-6 py-4 dark:border-slate-700 dark:bg-slate-900">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-slate-100">Your Applications</h2>
               </div>
 
               {/* Summary Stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 border-b border-gray-200 p-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 border-b border-gray-200 p-6 dark:border-slate-700">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">{sampleApplications.length}</div>
-                  <div className="text-sm text-gray-600">Total</div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-slate-100">{sampleApplications.length}</div>
+                  <div className="text-sm text-gray-600 dark:text-slate-300">Total</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-primary">{statusCounts.Applied}</div>
-                  <div className="text-sm text-gray-600">Applied</div>
+                  <div className="text-2xl font-bold text-primary dark:text-indigo-300">{statusCounts.Applied}</div>
+                  <div className="text-sm text-gray-600 dark:text-slate-300">Applied</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">{statusCounts.Interview}</div>
-                  <div className="text-sm text-gray-600">Interview</div>
+                  <div className="text-2xl font-bold text-purple-600 dark:text-purple-300">{statusCounts.Interview}</div>
+                  <div className="text-sm text-gray-600 dark:text-slate-300">Interview</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">{statusCounts.Offer}</div>
-                  <div className="text-sm text-gray-600">Offer</div>
+                  <div className="text-2xl font-bold text-green-600 dark:text-green-300">{statusCounts.Offer}</div>
+                  <div className="text-sm text-gray-600 dark:text-slate-300">Offer</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-red-600">{statusCounts.Rejected}</div>
-                  <div className="text-sm text-gray-600">Rejected</div>
+                  <div className="text-2xl font-bold text-red-600 dark:text-red-300">{statusCounts.Rejected}</div>
+                  <div className="text-sm text-gray-600 dark:text-slate-300">Rejected</div>
                 </div>
               </div>
 
               {/* Sample Applications */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-50 dark:bg-slate-900">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applied</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-slate-400">Company</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-slate-400">Role</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-slate-400">Applied</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-slate-400">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-gray-200 dark:divide-slate-700">
                     {sampleApplications.map((app, i) => (
-                      <tr key={i} className="hover:bg-gray-50">
+                      <tr key={i} className="hover:bg-gray-50 dark:hover:bg-slate-900/60">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="font-medium text-gray-900">{app.company}</div>
+                          <div className="font-medium text-gray-900 dark:text-slate-100">{app.company}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-gray-600">{app.role}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-gray-600">
+                        <td className="px-6 py-4 whitespace-nowrap text-gray-600 dark:text-slate-300">{app.role}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-gray-600 dark:text-slate-300">
                           {formatDate(app.appliedDate, { month: 'short', day: 'numeric' })}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -174,10 +174,10 @@ export default function HomePage() {
       <section id="features" className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-slate-100">
               Everything you need to manage your internship search
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 dark:text-slate-300">
               Built by students, for students. Every feature designed to help you land that internship.
             </p>
           </div>
@@ -185,15 +185,15 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature, i) => (
-                <div key={i} className="flex gap-4 p-6 rounded-xl border border-gray-200 hover:border-primary/40 hover:shadow-md hover:bg-primary-soft/30 transition-all">
+                <div key={i} className="flex gap-4 p-6 rounded-xl border border-gray-200 hover:border-primary/40 hover:shadow-md hover:bg-primary-soft/30 transition-all dark:border-slate-700 dark:hover:border-indigo-500/50 dark:hover:bg-indigo-950/30">
                   <div className="flex-shrink-0">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft">
-                      <feature.icon className="h-6 w-6 text-primary" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-soft dark:bg-indigo-950/60">
+                      <feature.icon className="h-6 w-6 text-primary dark:text-indigo-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
-                    <p className="mt-2 text-gray-600">{feature.description}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100">{feature.title}</h3>
+                    <p className="mt-2 text-gray-600 dark:text-slate-300">{feature.description}</p>
                   </div>
                 </div>
               ))}
@@ -203,13 +203,13 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="bg-gray-50 py-20">
+      <section id="testimonials" className="bg-gray-50 py-20 dark:bg-slate-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-slate-100">
               Loved by students across the country
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 dark:text-slate-300">
               See how InternTrack helped these students land their internships.
             </p>
           </div>
@@ -217,12 +217,12 @@ export default function HomePage() {
           <div className="mx-auto max-w-5xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, i) => (
-                <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <p className="text-gray-600 italic">"{testimonial.quote}"</p>
-                  <div className="mt-6 pt-6 border-t border-gray-100">
-                    <div className="font-semibold text-gray-900">{testimonial.author}</div>
-                    <div className="text-sm text-gray-600">{testimonial.program}</div>
-                    <div className="text-sm text-primary font-medium mt-1">{testimonial.year}</div>
+                <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 dark:bg-slate-800 dark:border-slate-700">
+                  <p className="text-gray-600 italic dark:text-slate-300">"{testimonial.quote}"</p>
+                  <div className="mt-6 pt-6 border-t border-gray-100 dark:border-slate-700">
+                    <div className="font-semibold text-gray-900 dark:text-slate-100">{testimonial.author}</div>
+                    <div className="text-sm text-gray-600 dark:text-slate-300">{testimonial.program}</div>
+                    <div className="text-sm text-primary font-medium mt-1 dark:text-indigo-300">{testimonial.year}</div>
                   </div>
                 </div>
               ))}
@@ -232,13 +232,13 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-linear-to-b from-white to-primary-soft/40">
+      <section className="py-20 bg-linear-to-b from-white to-primary-soft/40 dark:from-slate-950 dark:to-indigo-950/60">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-slate-100">
               Ready to organize your internship search?
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-600 dark:text-slate-300">
               Join thousands of students who use InternTrack to land their dream internships.
             </p>
             <div className="mt-10">

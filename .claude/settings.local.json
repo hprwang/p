@@ -11,7 +11,8 @@
       "Bash(npx @next/codemod@canary middleware-to-proxy . --force)",
       "Bash(git add *)",
       "Bash(git commit -m 'style: refresh UI with cohesive indigo brand design system *)",
-      "Bash(git ls-tree *)"
+      "Bash(git ls-tree *)",
+      "Bash(git commit -m 'feat: add dark mode with theme toggle across the app *)"
     ]
   },
   "enabledMcpjsonServers": [

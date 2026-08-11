@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: `dark:` variants apply inside any element with .dark.
+   The theme init script in the root layout adds/removes .dark on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+
+.dark {
+  --background: #020617; /* slate-950 — deepest page background */
+  --foreground: #e2e8f0; /* slate-200 */
 }
 
 @theme inline {
@@ -11,21 +20,27 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Brand palette — consume via bg-primary / text-primary / focus:ring-primary */
+  /* Brand palette — consume via bg-primary / text-primary / focus:ring-primary.
+     Primary stays indigo-600 in both modes (white text on it clears 4.5:1 on
+     dark too); add `dark:text-indigo-300` where primary is used for *text* so
+     links stay readable on dark surfaces. */
   --color-primary: #4f46e5;
   --color-primary-hover: #4338ca;
   --color-primary-soft: #eef2ff;
   --color-primary-ring: #6366f1;
 }
 
-/* The app renders light surfaces everywhere, so force a consistent light
-   scheme instead of flipping to an unsupported dark mode on dark OSes. */
+/* Let native controls (date pickers, scrollbars) follow the theme. */
 html {
   color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }

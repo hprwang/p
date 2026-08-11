@@ -48,13 +48,13 @@ export default function AnalyticsPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Analytics</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Analytics</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold mb-4">Applications by Status</h2>
+        <div className="bg-white rounded-lg border border-gray-200 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h2 className="text-lg font-semibold mb-4 dark:text-slate-100">Applications by Status</h2>
           {loading ? (
-            <p className="text-gray-500 text-center py-12">Loading…</p>
+            <p className="text-gray-500 text-center py-12 dark:text-slate-400">Loading…</p>
           ) : statusData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
@@ -65,34 +65,34 @@ export default function AnalyticsPage() {
               </PieChart>
             </ResponsiveContainer>
           ) : (
-            <p className="text-gray-500 text-center py-12">No data yet</p>
+            <p className="text-gray-500 text-center py-12 dark:text-slate-400">No data yet</p>
           )}
         </div>
 
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h2 className="text-lg font-semibold mb-4">Applications Over Time</h2>
+        <div className="bg-white rounded-lg border border-gray-200 p-6 dark:bg-slate-800 dark:border-slate-700">
+          <h2 className="text-lg font-semibold mb-4 dark:text-slate-100">Applications Over Time</h2>
           {loading ? (
-            <p className="text-gray-500 text-center py-12">Loading…</p>
+            <p className="text-gray-500 text-center py-12 dark:text-slate-400">Loading…</p>
           ) : monthlyData.length > 0 ? (
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
+                <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
+                <XAxis dataKey="month" tick={{ fill: '#64748b' }} axisLine={{ stroke: '#cbd5e1' }} tickLine={{ stroke: '#cbd5e1' }} />
+                <YAxis tick={{ fill: '#64748b' }} axisLine={{ stroke: '#cbd5e1' }} tickLine={{ stroke: '#cbd5e1' }} />
                 <Tooltip />
                 <Bar dataKey="count" fill="#4f46e5" />
               </BarChart>
             </ResponsiveContainer>
           ) : (
-            <p className="text-gray-500 text-center py-12">No data yet</p>
+            <p className="text-gray-500 text-center py-12 dark:text-slate-400">No data yet</p>
           )}
         </div>
       </div>
 
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold mb-4">Response Rate</h2>
-        <div className="text-4xl font-bold text-gray-900">{responseRate}%</div>
-        <p className="text-gray-600 mt-1">Applications that have moved past the initial stage</p>
+      <div className="bg-white rounded-lg border border-gray-200 p-6 dark:bg-slate-800 dark:border-slate-700">
+        <h2 className="text-lg font-semibold mb-4 dark:text-slate-100">Response Rate</h2>
+        <div className="text-4xl font-bold text-gray-900 dark:text-slate-100">{responseRate}%</div>
+        <p className="text-gray-600 dark:text-slate-300 mt-1">Applications that have moved past the initial stage</p>
       </div>
     </div>
   )
